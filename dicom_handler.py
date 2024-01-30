@@ -5,12 +5,12 @@ import numpy as np
 from PIL import Image
 
 
-def normalize_visualize_dicom_1(dcm_file: str, show: bool = True) -> np.uint8:
+def normalize_visualize_dicom_1(dcm_file: str, show: bool = False) -> np.uint8:
     """normalize and visualize dicom image
 
     Args:
         dcm_file (str): DICOM file path
-        show (bool, optional): whether to show the image. Defaults to True.
+        show (bool, optional): whether to show the image. Defaults to False.
 
     Returns:
         np.uint8: normalized image
@@ -31,7 +31,7 @@ def normalize_visualize_dicom_2(
     dcm_file: str,
     max_value: int | None = None,
     min_value: int | None = None,
-    show: bool = True,
+    show: bool = False,
 ) -> np.uint8:
     """normalize and visualize dicom image
 
@@ -39,7 +39,7 @@ def normalize_visualize_dicom_2(
         dcm_file (str): DICOM file path
         max_value (int | None, optional): houns field max value. Defaults to None.
         min_value (int | None, optional): houns field minimum value. Defaults to None.
-        show (bool, optional): whether to show the image. Defaults to True.
+        show (bool, optional): whether to show the image. Defaults to False.
 
     Returns:
         np.uint8: normalized image
@@ -153,6 +153,11 @@ if __name__ == "__main__":
     # dicom = change_tags("data/CT/1-01.dcm", PatientName="test", ImageType="RGB")
     # print(dicom.PatientName, dicom.ImageType)
 
-    new_array = np.zeros((512, 512)).tobytes()
-    new_dicom_pixel_array = change_tags("data/CT/1-01.dcm", PixelData=new_array)
-    print(new_dicom_pixel_array.pixel)
+    # new_array = np.zeros((512, 512)).tobytes()
+    # new_dicom_pixel_array = change_tags("data/CT/1-01.dcm", PixelData=new_array)
+    # print(new_dicom_pixel_array.pixel)
+
+    array = normalize_visualize_dicom_2("data/CT/1-01.dcm", max_value=200, min_value=-200)
+    img = Image.fromarray(array)
+    img.save("data/output/CT/1-01.png")
+
