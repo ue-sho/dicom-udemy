@@ -144,7 +144,15 @@ def change_tags(dcm_file, **kwargs) -> pydicom.Dataset:
 
 
 if __name__ == "__main__":
-    normalize_visualize_dicom_1("data/CT/1-01.dcm", show=True)
-    normalize_visualize_dicom_2(
-        "data/CT/1-01.dcm", max_value=200, min_value=-200, show=True
-    )
+    # normalize_visualize_dicom_1("data/CT/1-01.dcm", show=True)
+
+    # normalize_visualize_dicom_2(
+    #     "data/CT/1-01.dcm", max_value=200, min_value=-200, show=True
+    # )
+
+    # dicom = change_tags("data/CT/1-01.dcm", PatientName="test", ImageType="RGB")
+    # print(dicom.PatientName, dicom.ImageType)
+
+    new_array = np.zeros((512, 512)).tobytes()
+    new_dicom_pixel_array = change_tags("data/CT/1-01.dcm", PixelData=new_array)
+    print(new_dicom_pixel_array.pixel)
