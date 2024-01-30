@@ -11,6 +11,7 @@ pillow = "*"
 opencv-python = "*"
 black = "*"
 types-pillow = "*"
+glob2 = "*"
 
 [dev-packages]
 

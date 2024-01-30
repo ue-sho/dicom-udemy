@@ -1,8 +1,10 @@
 """DICOM handler"""
 
+import os
 import pydicom
 import numpy as np
 from PIL import Image
+from glob import glob
 
 
 def normalize_visualize_dicom_1(dcm_file: str, show: bool = False) -> np.uint8:
@@ -143,21 +145,40 @@ def change_tags(dcm_file, **kwargs) -> pydicom.Dataset:
     return dicom_file_data
 
 
-if __name__ == "__main__":
-    # normalize_visualize_dicom_1("data/CT/1-01.dcm", show=True)
+def dicom_to_png(dcm_file: str, png_path: str):
+    """convert DICOM file to PNG file
 
-    # normalize_visualize_dicom_2(
-    #     "data/CT/1-01.dcm", max_value=200, min_value=-200, show=True
-    # )
-
-    # dicom = change_tags("data/CT/1-01.dcm", PatientName="test", ImageType="RGB")
-    # print(dicom.PatientName, dicom.ImageType)
-
-    # new_array = np.zeros((512, 512)).tobytes()
-    # new_dicom_pixel_array = change_tags("data/CT/1-01.dcm", PixelData=new_array)
-    # print(new_dicom_pixel_array.pixel)
-
-    array = normalize_visualize_dicom_2("data/CT/1-01.dcm", max_value=200, min_value=-200)
+    Args:
+        dcm_file (str): DICOM file path
+        png_path (str): PNG file path
+    """
+    slice_name = os.path.basename(dcm_file)[:-4]
+    array = normalize_visualize_dicom_1(dcm_file, show=False)
     img = Image.fromarray(array)
-    img.save("data/output/CT/1-01.png")
+    img.save(f"{png_path}/{slice_name}.png")
 
+
+if __name__ == "__main__":
+
+    def section2_visualize_dicom():
+        normalize_visualize_dicom_1("data/CT/1-01.dcm", show=True)
+
+        normalize_visualize_dicom_2(
+            "data/CT/1-01.dcm", max_value=200, min_value=-200, show=True
+        )
+
+    def section2_change_tags():
+        dicom = change_tags("data/CT/1-01.dcm", PatientName="test", ImageType="RGB")
+        print(dicom.PatientName, dicom.ImageType)
+
+    def section2_change_pixel_data():
+        new_array = np.zeros((512, 512)).tobytes()
+        new_dicom_pixel_array = change_tags("data/CT/1-01.dcm", PixelData=new_array)
+        print(new_dicom_pixel_array.pixel)
+
+    def section3_convert_group_of_dicoms_to_png():
+        dicom_files_path = glob("data/CT/*.dcm")
+        for dcm_file in dicom_files_path:
+            dicom_to_png(dcm_file, "data/output/CT")
+
+    section3_convert_group_of_dicoms_to_png()
