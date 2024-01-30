@@ -121,6 +121,155 @@ def anonymize_dicom(
     return dicom_file
 
 
+def change_tags(
+    dcm_file,
+    ImageType=None,
+    SOPClassUID=None,
+    SOPInstanceUID=None,
+    StudyDate=None,
+    SeriesDate=None,
+    ContentDate=None,
+    StudyTime=None,
+    SeriesTime=None,
+    ContentTime=None,
+    AccessionNumber=None,
+    Modality=None,
+    Manufacturer=None,
+    ReferringPhysicianName=None,
+    PatientName=None,
+    PatientID=None,
+    PatientBirthDate=None,
+    PatientSex=None,
+    SliceThickness=None,
+    PatientPosition=None,
+    StudyInstanceUID=None,
+    SeriesInstanceUID=None,
+    StudyID=None,
+    SeriesNumber=None,
+    InstanceNumber=None,
+    ImagePositionPatient=None,
+    ImageOrientationPatient=None,
+    FrameOfReferenceUID=None,
+    PositionReferenceIndicator=None,
+    SamplesPerPixel=None,
+    PhotometricInterpretation=None,
+    Rows=None,
+    Columns=None,
+    PixelSpacing=None,
+    BitsAllocated=None,
+    BitsStored=None,
+    HighBit=None,
+    PixelRepresentation=None,
+    WindowCenter=None,
+    WindowWidth=None,
+    RescaleIntercept=None,
+    RescaleSlope=None,
+    RescaleType=None,
+    PixelData=None,
+) -> pydicom.Dataset:
+    """change tags of DICOM file
+
+    Args:
+        dcm_file (str): DICOM file path
+        other args: DICOM tags
+
+    Returns:
+        pydicom.Dataset: DICOM file
+    """
+    dicom_file_data = pydicom.dcmread(dcm_file)
+
+    if ImageType:
+        dicom_file_data.ImageType = ImageType
+    if SOPClassUID:
+        dicom_file_data.SOPClassUID = SOPClassUID
+    if SOPInstanceUID:
+        dicom_file_data.SOPInstanceUID = SOPInstanceUID
+    if StudyDate:
+        dicom_file_data.StudyDate = StudyDate
+    if SeriesDate:
+        dicom_file_data.SeriesDate = SeriesDate
+    if ContentDate:
+        dicom_file_data.ContentDate = ContentDate
+    if StudyTime:
+        dicom_file_data.StudyTime = StudyTime
+    if SeriesTime:
+        dicom_file_data.SeriesTime = SeriesTime
+    if ContentTime:
+        dicom_file_data.ContentTime = ContentTime
+    if AccessionNumber:
+        dicom_file_data.AccessionNumber = AccessionNumber
+    if Modality:
+        dicom_file_data.Modality = Modality
+    if Manufacturer:
+        dicom_file_data.Manufacturer = Manufacturer
+    if ReferringPhysicianName:
+        dicom_file_data.ReferringPhysicianName = ReferringPhysicianName
+    if PatientName:
+        dicom_file_data.PatientName = PatientName
+    if PatientID:
+        dicom_file_data.PatientID = PatientID
+    if PatientBirthDate:
+        dicom_file_data.PatientBirthDate = PatientBirthDate
+    if PatientSex:
+        dicom_file_data.PatientSex = PatientSex
+    if SliceThickness:
+        dicom_file_data.SliceThickness = SliceThickness
+    if PatientPosition:
+        dicom_file_data.PatientPosition = PatientPosition
+    if StudyInstanceUID:
+        dicom_file_data.StudyInstanceUID = StudyInstanceUID
+    if SeriesInstanceUID:
+        dicom_file_data.SeriesInstanceUID = SeriesInstanceUID
+    if StudyID:
+        dicom_file_data.StudyID = StudyID
+    if SeriesNumber:
+        dicom_file_data.SeriesNumber = SeriesNumber
+    if InstanceNumber:
+        dicom_file_data.InstanceNumber = InstanceNumber
+    if ImagePositionPatient:
+        dicom_file_data.ImagePositionPatient = ImagePositionPatient
+    if ImageOrientationPatient:
+        dicom_file_data.ImageOrientationPatient = ImageOrientationPatient
+    if FrameOfReferenceUID:
+        dicom_file_data.FrameOfReferenceUID = FrameOfReferenceUID
+    if PositionReferenceIndicator:
+        dicom_file_data.PositionReferenceIndicator = PositionReferenceIndicator
+    if SamplesPerPixel:
+        dicom_file_data.SamplesPerPixel = SamplesPerPixel
+    if PhotometricInterpretation:
+        dicom_file_data.PhotometricInterpretation = PhotometricInterpretation
+    if Rows:
+        dicom_file_data.Rows = Rows
+    if Columns:
+        dicom_file_data.Columns = Columns
+    if PixelSpacing:
+        dicom_file_data.PixelSpacing = PixelSpacing
+    if BitsAllocated:
+        dicom_file_data.BitsAllocated = BitsAllocated
+    if BitsStored:
+        dicom_file_data.BitsStored = BitsStored
+    if HighBit:
+        dicom_file_data.HighBit = HighBit
+    if PixelRepresentation:
+        dicom_file_data.PixelRepresentation = PixelRepresentation
+    if WindowCenter:
+        dicom_file_data.WindowCenter = WindowCenter
+    if WindowWidth:
+        dicom_file_data.WindowWidth = WindowWidth
+    if WindowWidth:
+        dicom_file_data = WindowWidth
+    if RescaleIntercept:
+        dicom_file_data.RescaleIntercept = RescaleIntercept
+    if RescaleSlope:
+        dicom_file_data.RescaleSlope = RescaleSlope
+    if RescaleType:
+        dicom_file_data.RescaleType = RescaleType
+    if PixelData:
+        dicom_file_data.PixelData = PixelData
+
+    return dicom_file_data
+
+
 if __name__ == "__main__":
     normalize_visualize_dicom_1("data/CT/1-01.dcm", show=True)
     normalize_visualize_dicom_2(
