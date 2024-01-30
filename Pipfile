@@ -9,6 +9,8 @@ nibabel = "*"
 numpy = "*"
 pillow = "*"
 opencv-python = "*"
+black = "*"
+types-pillow = "*"
 
 [dev-packages]
 
